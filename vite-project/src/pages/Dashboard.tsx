@@ -9,7 +9,6 @@ const { Title } = Typography;
 export const Dashboard: React.FC = () => {
   const axiosInstance = useAxios();
   const [attendees, setAttendees] = useState<IAttendeeFormValues[]>([])
-  const userRole = localStorage.getItem("userRole");
 
   useEffect(() => {
     axiosInstance.get<IAttendeeFormValues[]>("/attendees").then((res) => {
@@ -18,10 +17,6 @@ export const Dashboard: React.FC = () => {
       console.error(error);
     })
   }, [axiosInstance]);
-
-  if (!userRole) {
-    return null
-  }
 
   const dataSource: IAttendeesTableRow[] = attendees.map((attendee, index) => ({
     key: index.toString(),

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Button, Drawer, Grid, Menu, MenuProps, Typography } from "antd";
+import { Grid, Menu, MenuProps, Typography } from "antd";
 import { FaHome, FaClipboardList, FaCar, FaHotel, FaGrinStars, FaUser, FaBars, FaTable } from "react-icons/fa";
 import React, { useState } from "react";
 
@@ -34,53 +34,39 @@ export const Navbar: React.FC = () => {
 
     return (
         <nav
-        style={{
-            backgroundColor: "#f5f5f5",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-            padding: "10px",
-            position: "relative",
-        }}
-    >
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <Title level={4} style={{ margin: 0 }}>
-                Menorca
-            </Title>
-            {!screens.lg && (
-                <FaBars
-                    style={{ fontSize: "24px", cursor: "pointer" }}
-                    onClick={toggleMenu}
+            style={{
+                backgroundColor: "#f5f5f5",
+                boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                padding: "10px",
+                position: "relative",
+            }}
+        >
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <Title level={4} style={{ margin: 0 }}>
+                    Menorca
+                </Title>
+                {!screens.lg && (
+                    <FaBars
+                        style={{ fontSize: "24px", cursor: "pointer" }}
+                        onClick={toggleMenu}
+                    />
+                )}
+            </div>
+            {!screens.lg && menuOpen ? (
+                <Menu
+                    mode="vertical"
+                    defaultSelectedKeys={["/"]}
+                    items={items}
+                />
+            ) : (
+                <Menu
+                    mode="horizontal"
+                    theme="light"
+                    defaultSelectedKeys={["/"]}
+                    items={items}
+                    style={{ marginTop: "10px", display: "flex", flexWrap: "wrap" }}
                 />
             )}
-        </div>
-        {screens.lg ? (
-            <Menu
-                mode="horizontal"
-                theme="light"
-                defaultSelectedKeys={["/"]}
-                items={items}
-                style={{ marginTop: "10px", display: "flex", flexWrap: "wrap" }}
-            />
-        ) : (
-            <Drawer
-                title="Menu"
-                placement="right"
-                closable
-                onClose={toggleMenu}
-                open={menuOpen}
-            >
-                {navLinks.map((link) => (
-                    <Button
-                        key={link.route}
-                        href={link.route}
-                        type="link"
-                        icon={link.icon}
-                        style={{ display: "block", textAlign: "left", padding: "10px 20px" }}
-                    >
-                        {link.name}
-                    </Button>
-                ))}
-            </Drawer>
-        )}
-    </nav>
+        </nav>
     )
 }

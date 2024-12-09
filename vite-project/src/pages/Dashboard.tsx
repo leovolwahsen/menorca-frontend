@@ -105,7 +105,7 @@ export const Dashboard: React.FC = () => {
   return (
     <Flex vertical justify="center" align="center">
       <Title level={2}>Dashboard</Title>
-      <Table dataSource={dataSource} columns={columns} style={{ width: "99vw"}} />;
+      <Table dataSource={dataSource} columns={columns} style={{ width: "99vw"}} />
     </Flex>
   )
 }
